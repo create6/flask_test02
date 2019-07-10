@@ -2,7 +2,7 @@
 
 from flask import Flask
 
-# app = Flask(__name__)
+app = Flask(__name__)
 
 #config
 # <Config {'SERVER_NAME': None, 'SECRET_KEY': None, 'SESSION_COOKIE_HTTPONLY': True,
@@ -37,6 +37,7 @@ from flask import Flask
 
 #从环境变量中加载，单次打开终端有效
 # app.config.from_envvar('MY_CONFIG')
+
 class Config(object):
     REDIS='redis://127.0.0.1:6379/0'
 class DebugConfig(Config):
@@ -47,10 +48,9 @@ class DebugConfig(Config):
 def createFlaskApp(config):
     app=Flask(__name__)
     app.config.from_object(Config)
-    app.config.from_envvar('MY_CONFIG')
+    app.config.from_envvar('MY_CONFIG')  # 若直接用终端跑，不使用pycharm，需要在终端指定此环境变量 export MY_CONFIG=config.ini
 
     return app
-
 
 app=createFlaskApp(DebugConfig)
 
